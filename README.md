@@ -1,1 +1,1 @@
-# The Rick and Morty app
+# The Rick and Morty App
