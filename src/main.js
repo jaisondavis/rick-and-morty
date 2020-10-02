@@ -1,13 +1,16 @@
 import Vue from 'vue'
-import Home from '@/App/Home'
-import Charecter from '@/App/Charecter'
 import VueRouter from 'vue-router'
-import vuetify from '@/_plugins/vuetify';
+import vuetify from '@/_plugins/vuetify'
+
+import App from '@/App'
+import { Home } from '@/Universe'
+import { Charecter } from '@/Charecter'
+import { PageNotFound } from '@/PageNotFound'
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/charecter/:id', component: Home },
-  { path: '*', component: Charecter }
+  { path: '', name: 'Home', component: Home },
+  { path: '/charecter/:id', name: 'Charecter', component: Charecter },
+  { path: '*', name: 'Page Not Found', component: PageNotFound }
 ]
 
 const router = new VueRouter({
@@ -17,8 +20,11 @@ const router = new VueRouter({
 
 Vue.config.productionTip = false
 
+Vue.use(VueRouter)
+Vue.use(router)
+
 new Vue({
   vuetify,
   router,
-  render: h => h(Home)
+  render: h => h(App)
 }).$mount('#app')
