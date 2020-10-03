@@ -1,7 +1,7 @@
-import charecters from './charecters'
+import characters from './characters'
 import locations from './locations'
 
 export default {
-    ...charecters,
+    ...characters,
     ...locations
 }
