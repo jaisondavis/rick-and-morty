@@ -21,10 +21,10 @@
                             </v-avatar>
                         </v-col>
                         <v-col cols="2">
-                            <v-avatar style="border: 1px solid #6161618c">
+                            <v-avatar style="border: 1px solid #a7a7a78c">
                                 <v-icon
                                     large
-                                    color="grey darken-2"
+                                    color="black darken-1"
                                 >
                                     mdi-chevron-right
                                 </v-icon>

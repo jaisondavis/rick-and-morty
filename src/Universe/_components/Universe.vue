@@ -3,7 +3,7 @@
         <v-row justify="center">
             <v-col cols="3">
                 <v-img
-                    src="https://www.freepnglogos.com/uploads/rick-and-morty-png/rick-and-morty-portal-shoes-white-clothing-zavvi-23.png"
+                    src="https://media1.giphy.com/media/psmJf376CrS92Dy5wf/source.gif"
                 ></v-img>
             </v-col>
         </v-row>
@@ -15,13 +15,13 @@
             >
                 <v-card flat style="border: 1px solid #74747429; border-radius: 30px;">
                     <v-card-text style="padding: 28px;">
-                        <h1 style="line-height: 1.2;">
+                        <h1 style="line-height: 1.2; font-weight: 400;">
                             {{loc.name}}
                         </h1>
-                        <h2 style="margin: 20px 0px;">
+                        <h2 style="margin: 17px 0px; font-weight: 300;">
                             {{loc.type}}
                         </h2>
-                        <h3 style="margin: 20px 0px;">
+                        <h3 style="margin: 17px 0px; font-weight: 400;">
                             {{loc.dimension}} <span style="font-weight: 300;"> / Dimension</span>
                         </h3>
 

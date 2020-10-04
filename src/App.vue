@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="fill-height" id="app-view" style="background: #eaf5ea78;">
+    <div class="fill-height" id="app-view" style="background: #f6fcf678">
       <transition name="component-fade" mode="out-in">
         <router-view />
       </transition>
