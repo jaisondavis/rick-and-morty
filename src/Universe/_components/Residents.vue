@@ -10,6 +10,7 @@
                 v-on="on"
                 style="border-radius: 18px; min-height: 70px;"
                 v-if="residents.length"
+                @click="getAllCharacters"
             >
                 <v-container style="padding: 0px 20px;">
                     <v-row>
@@ -60,7 +61,12 @@
 
         <v-card>
             <v-card-text style="padding: 10px 20px;">
-                <v-row>
+                <v-row style="justify-content: center;">
+                    <v-progress-circular
+                        v-if="!residentData[0]"
+                        indeterminate
+                        color="dark lighten-5"
+                    ></v-progress-circular>
                     <v-col
                         v-for="(res, index) in residentData"
                         :key="index"
@@ -126,12 +132,16 @@
             this.residents.map(chr => {
                 api.getCharacter(chr)
                     .then(response => {
-                        this.residentData.push(response.data)
+                        if(this.residentData.length<response.data.length) {
+                            this.residentData.push(response.data)
+                        }
                     })
                     .catch(() => {
                         api.getCharacter(chr)
                             .then(response => {
-                                this.residentData.push(response.data)
+                                if(this.residentData.length<response.data.length) {
+                                    this.residentData.push(response.data)
+                                }
                             })
                     })
             })
@@ -140,6 +150,21 @@
             goToCharacterPage(resident) {
                 this.$router.push({ 
                     path: '/character/'+resident.id
+                })
+            },
+            getAllCharacters() {
+                console.log("getAllCharacters")
+                this.residents.map(chr => {
+                    api.getCharacter(chr)
+                        .then(response => {
+                            this.residentData.push(response.data)
+                        })
+                        .catch(() => {
+                            api.getCharacter(chr)
+                                .then(response => {
+                                    this.residentData.push(response.data)
+                                })
+                        })
                 })
             }
         }
