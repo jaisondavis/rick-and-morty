@@ -115,6 +115,9 @@
     .v-dialog {
         border-radius: 30px !important;
     }
+    .v-card:focus {
+        box-shadow: 0 0 3px 2px #ddd !important;
+    }
 </style>
 <script>
     import api from '../_api'
@@ -132,14 +135,14 @@
             this.residents.map(chr => {
                 api.getCharacter(chr)
                     .then(response => {
-                        if(this.residentData.length<response.data.length) {
+                        if(this.residentData.length===0) {
                             this.residentData.push(response.data)
                         }
                     })
                     .catch(() => {
                         api.getCharacter(chr)
                             .then(response => {
-                                if(this.residentData.length<response.data.length) {
+                                if(this.residentData.length===0) {
                                     this.residentData.push(response.data)
                                 }
                             })
@@ -153,19 +156,15 @@
                 })
             },
             getAllCharacters() {
-                console.log("getAllCharacters")
-                this.residents.map(chr => {
-                    api.getCharacter(chr)
-                        .then(response => {
-                            this.residentData.push(response.data)
-                        })
-                        .catch(() => {
-                            api.getCharacter(chr)
-                                .then(response => {
-                                    this.residentData.push(response.data)
-                                })
-                        })
-                })
+                // console.log("getAllCharacters ", (4-this.residents.slice(0,4).length)*2, 4-this.residents.slice(0,4).length)
+                // this.residents.map(chr => {
+                //     api.getCharacter(chr)
+                //         .then(response => {
+                //             if(this.residentData.length===0) {
+                //                 this.residentData.push(response.data)
+                //             }
+                //         })
+                // })
             }
         }
     }
