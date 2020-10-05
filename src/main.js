@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import vuetify from '@/_plugins/vuetify'
-
 import App from '@/App'
 import '@/_plugins/registerServiceWorker'
 
