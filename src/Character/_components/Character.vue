@@ -67,14 +67,21 @@
             }
         },
         created() {
+            console.log(this.$route)
             if (this.$route.params.id) {
                 api.getCharacter(this.$route.params.id)
                     .then(response => {
+                        console.log(response, " rr")
                         this.resident = response
                         document.title = response.data.name + ' | Rick & Morty'
                     })
                     .catch(error => {
                         console.log(error)
+                        api.getCharacter(this.$route.params.id)
+                            .then(response => {
+                                this.resident = response
+                                document.title = response.data.name + ' | Rick & Morty'
+                            })
                     })
             } else {
                 this.$route.push('/character-not-found')

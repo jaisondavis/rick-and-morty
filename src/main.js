@@ -5,7 +5,8 @@ import vuetify from '@/_plugins/vuetify'
 import App from '@/App'
 import { Home } from '@/Universe'
 import { Character } from '@/Character'
-import { PageNotFound } from '@/PageNotFound'
+import { PageNotFound } from '@/404'
+import '@/_plugins/registerServiceWorker'
 
 const routes = [
   {
@@ -40,6 +41,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  console.log(from, to)
   document.title = to.meta.title
   next()
 })

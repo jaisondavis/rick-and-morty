@@ -1,10 +1,9 @@
-import { Character } from '@/Character'
-import { createLocalVue, mount } from '@vue/test-utils'
+import { Residents } from '@/Universe'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 
 import Vuetify from 'vuetify'
 
-
-describe('Character page', () => {
+describe('Residents page', () => {
     const localVue = createLocalVue()
     let vuetify
 
@@ -13,21 +12,23 @@ describe('Character page', () => {
     })
 
     const $route = {
-        params: { 
-            id: 30 
+        params: {
+            id: 30
         }
     }
 
-    const wrapper = mount(Character, {
+    const wrapper = shallowMount(Residents, {
         localVue,
         vuetify,
         mocks: {
             $route
+        },
+        propsData: {
+            residents: []
         }
       })
 
-    test('is a Vue component', () => {
+    test("is a Vue instance", () => {
         expect(wrapper.vm).toBeTruthy();
     })
-    
 })

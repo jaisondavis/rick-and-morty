@@ -11,7 +11,9 @@
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "idb": "^5.0.6",
     "node-sass": "^4.14.1",
+    "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-router": "^3.4.5",
     "vuetify": "^2.2.11"
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",
     "@vue/cli-plugin-eslint": "^4.5.0",
+    "@vue/cli-plugin-pwa": "^4.5.6",
     "@vue/cli-plugin-unit-jest": "^4.5.6",
     "@vue/cli-service": "^4.5.0",
     "@vue/test-utils": "^1.0.3",

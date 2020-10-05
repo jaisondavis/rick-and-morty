@@ -3,7 +3,9 @@
         <v-row justify="center">
             <v-col cols="3">
                 <v-img
-                    src="https://media1.giphy.com/media/psmJf376CrS92Dy5wf/source.gif"
+                    class="logo"
+                    max-width="200"
+                    src="@/_assets/rick_logo.png"
                 ></v-img>
             </v-col>
         </v-row>
@@ -15,7 +17,7 @@
             >
                 <v-card flat style="border: 1px solid #74747429; border-radius: 30px;">
                     <v-card-text style="padding: 28px;">
-                        <h1 style="line-height: 1.2; font-weight: 400;">
+                        <h1 style="line-height: 1.2; font-weight: 400; white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;">
                             {{loc.name}}
                         </h1>
                         <h2 style="margin: 17px 0px; font-weight: 300;">

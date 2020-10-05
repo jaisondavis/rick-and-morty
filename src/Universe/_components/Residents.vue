@@ -9,15 +9,19 @@
                 v-bind="attrs"
                 v-on="on"
                 style="border-radius: 18px; min-height: 70px;"
+                v-if="residents.length"
             >
                 <v-container style="padding: 0px 20px;">
                     <v-row>
-                        <v-col cols="2" v-for="i in residentData.slice(0,4)" :key="i.id">
+                        <v-col cols="2" v-for="i in residents.slice(0,4)" :key="i.id">
                             <v-avatar>
-                                <img
-                                    :src="i.image"
-                                    alt="John"
+                                <v-icon
+                                    large
+                                    color="white darken-1"
+                                    style="background: grey"
                                 >
+                                    mdi-face
+                                </v-icon>
                             </v-avatar>
                         </v-col>
                         <v-col cols="2">
@@ -27,6 +31,27 @@
                                     color="black darken-1"
                                 >
                                     mdi-chevron-right
+                                </v-icon>
+                            </v-avatar>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-card>
+            <v-card
+                color="white lighten-2"
+                dark
+                style="border-radius: 18px; min-height: 70px;"
+                v-else
+            >
+                <v-container style="padding: 0px 20px;">
+                    <v-row>
+                        <v-col style="color: grey; text-align: center;">
+                            <v-avatar style="border: 1px solid #a7a7a78c">
+                                <v-icon
+                                    large
+                                    color="grey darken-1"
+                                >
+                                    mdi-close-circle
                                 </v-icon>
                             </v-avatar>
                         </v-col>
@@ -92,7 +117,7 @@
         props: {
             residents: Array
         },
-        mounted() {
+        created() {
             this.residents.map(chr => {
                 api.getCharacter(chr)
                     .then(response => {
@@ -103,14 +128,22 @@
                     })
                     .catch(error => {
                         console.log(error)
+
+                        api.getCharacter(chr)
+                            .then(response => {
+                                if (this.residentPreview.length<4) {
+                                    this.residentPreview.push(response.data)
+                                }
+                                this.residentData.push(response.data)
+                            })
                     })
             })
-            
         },
         methods: {
             goToCharacterPage(resident) {
-                console.log(resident)
-                this.$router.push('/character/'+resident.id)
+                this.$route.push({ 
+                    path: '/character/'+resident.id
+                })
             }
         }
     }
