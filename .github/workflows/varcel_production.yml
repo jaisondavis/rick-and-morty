@@ -36,7 +36,7 @@ jobs:
       - name: Vercel Action
         uses: amondnet/vercel-action@v19.0.1+3
         with:
-          vercelToken: IpCoc6EMTmPcJNq9mvpBs6tB
-          vercelOrgId: ei3WdVrtpawk3qvmj4vKLOG9
-          vercelProjectId: QmSNzi8PG37CWV5ZTPjtwV1XXxDvdghHKYvADM2hKJYJ1R
-          githubToken: 7651983073cc71ca58c67fda8192e7dfdf9829e1
+          vercel-token: IpCoc6EMTmPcJNq9mvpBs6tB
+          vercel-org-id: ei3WdVrtpawk3qvmj4vKLOG9
+          vercel-project-id: QmSNzi8PG37CWV5ZTPjtwV1XXxDvdghHKYvADM2hKJYJ1R
+          github-token: ${{ secrets.VERCEL_TKN }}
