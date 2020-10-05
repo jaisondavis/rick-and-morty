@@ -4,7 +4,7 @@
             <v-col cols="3">
                 <v-img
                     class="logo"
-                    max-width="150"
+                    max-width="200"
                     src="@/_assets/rick_logo.png"
                 ></v-img>
             </v-col>
