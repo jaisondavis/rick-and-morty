@@ -36,6 +36,6 @@ jobs:
       - uses: actions/vercel-deployment@0.5.1 
         with:
           vercelToken: IpCoc6EMTmPcJNq9mvpBs6tB
-          vercelOrgId: 
-          vercelProjectId:
+          vercelOrgId: ei3WdVrtpawk3qvmj4vKLOG9
+          vercelProjectId: QmSNzi8PG37CWV5ZTPjtwV1XXxDvdghHKYvADM2hKJYJ1R
           githubToken: 7651983073cc71ca58c67fda8192e7dfdf9829e1
