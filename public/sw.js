@@ -91,7 +91,7 @@ function insertIntoStore(req, resObj, store) {
             objectStore = transaction.objectStore(store)
         }
         catch(e) {
-            objectStore = db.createObjectStore(store, { keyPath: "request" })
+            objectStore = event.target.result.createObjectStore(store, { keyPath: "request" })
             objectStore.createIndex("response", "response", { unique: false })
         }
 
