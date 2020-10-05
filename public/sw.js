@@ -24,6 +24,11 @@ self.addEventListener('fetch', function(event) {
                         return response || fetch(event.request).then(function(response) {
                             cache.put(event.request, response.clone())
                             return response;
+                        }).catch(error => {
+                            return fetch(event.request).then(function(response) {
+                                cache.put(event.request, response.clone())
+                                return response;
+                            })
                         })
                     })
                 })
@@ -50,6 +55,13 @@ function fetchFromStore(req, store) {
                                 insertIntoStore(req.url, {data: responseJson}, store)
                                 resolve({data: responseJson})
                             })
+                        }).catch(error => {
+                            fetch(req).then(function(response) {
+                                response.json().then(responseJson => {
+                                    insertIntoStore(req.url, {data: responseJson}, store)
+                                    resolve({data: responseJson})
+                                })
+                            })
                         })
                     }
                 }
@@ -67,8 +79,17 @@ function fetchFromStore(req, store) {
 function insertIntoStore(req, resObj, store) {
     var openReq = indexedDB.open('rick-requests', 1)
     openReq.onsuccess = function(event) {
-        var transaction = event.target.result.transaction([store], "readwrite")
-        var objectStore = transaction.objectStore(store)
+        var objectStore, transaction
+
+        try {
+            transaction = event.target.result.transaction([store], "readwrite")
+            objectStore = transaction.objectStore(store)
+        }
+        catch(e) {
+            objectStore = db.createObjectStore(store, { keyPath: "request" })
+            objectStore.createIndex("response", "response", { unique: false })
+        }
+
         var toAdd = { request: req, response: resObj }
         objectStore.add(toAdd)
     }
