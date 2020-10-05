@@ -7,12 +7,12 @@ export default {
                 'request_type': 'character'
             }
         })
-            .then(response => {
-                return response
-            })
-            .catch(error => {
-                console.log("error", error)
-            })
+        .then(response => {
+            return response
+        })
+        .catch(error => {
+            console.log("error", error)
+        })
     },
     async getCharacter(chr) {
         return axios.get(chr, {

@@ -29,6 +29,10 @@ describe('Residents page', () => {
       })
 
     test("is a Vue instance", () => {
-        expect(wrapper.vm).toBeTruthy();
+        expect(wrapper.vm).toBeTruthy()
+    })
+
+    test('it should', () => {
+        expect(true).toBeTruthy()
     })
 })

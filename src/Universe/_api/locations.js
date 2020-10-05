@@ -7,8 +7,8 @@ export default {
                 'request_type': 'location'
             }
         })
-            .then((response) => {
-                return response
-            })
+        .then((response) => {
+            return response
+        })
     }
 }

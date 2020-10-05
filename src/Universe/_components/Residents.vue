@@ -141,7 +141,7 @@
         },
         methods: {
             goToCharacterPage(resident) {
-                this.$route.push({ 
+                this.$router.push({ 
                     path: '/character/'+resident.id
                 })
             }
