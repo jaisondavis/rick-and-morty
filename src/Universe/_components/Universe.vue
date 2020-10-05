@@ -47,10 +47,12 @@
             }
         },
         async created() {
-            const firstLocation = await api.getLocation()
+            var firstLocation = await api.getLocation().catch(async () => {
+                firstLocation = await api.getLocation()
+            })
             this.location = [...firstLocation.data.results]
             
-            for (let i=1; i<=firstLocation.data.info.pages; i++) {
+            for (let i=2; i<=firstLocation.data.info.pages; i++) {
                 api.getLocation(i)
                     .then(response => {
                         this.location = [...this.location, ...response.data.results]
