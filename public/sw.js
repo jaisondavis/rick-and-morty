@@ -41,33 +41,38 @@ function fetchFromStore(req, store) {
         function(resolve, reject) {
             var openReq = indexedDB.open('rick-requests', 1)
             openReq.onsuccess = function(event) {
-                var transaction = event.target.result.transaction([store])
-                var objectStore = transaction.objectStore(store)
-                var request = objectStore.get(req.url)
+                try {
+                    var transaction = event.target.result.transaction([store])
+                    var objectStore = transaction.objectStore(store)
+                    var request = objectStore.get(req.url)
 
-                request.onsuccess = function(event) {
-                    resp = request.result
-                    if (resp) {
-                        resolve(resp.response)
-                    } else {
-                        fetch(req).then(function(response) {
-                            response.json().then(responseJson => {
-                                insertIntoStore(req.url, {data: responseJson}, store)
-                                resolve({data: responseJson})
-                            })
-                        }).catch(error => {
+                    request.onsuccess = function(event) {
+                        resp = request.result
+                        if (resp) {
+                            resolve(resp.response)
+                        } else {
                             fetch(req).then(function(response) {
                                 response.json().then(responseJson => {
                                     insertIntoStore(req.url, {data: responseJson}, store)
                                     resolve({data: responseJson})
                                 })
+                            }).catch(error => {
+                                fetch(req).then(function(response) {
+                                    response.json().then(responseJson => {
+                                        insertIntoStore(req.url, {data: responseJson}, store)
+                                        resolve({data: responseJson})
+                                    })
+                                })
                             })
-                        })
+                        }
                     }
+                    request.onerror = function(event) {
+                        reject("error")
+                    }
+                } catch(e) {
+                    createDB(store)
                 }
-                request.onerror = function(event) {
-                    reject("error")
-                }
+                
             }
             openReq.onerror = function(event) {
                 reject("error")

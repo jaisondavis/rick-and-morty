@@ -13,32 +13,30 @@
             >
                 <v-container style="padding: 0px 20px;">
                     <v-row>
-                        <v-col cols="2" v-for="i in residents.slice(0,4)" :key="i.id">
+                        <v-col cols="2" v-for="(res, i) in residents.slice(0,4)" :key="res.id">
                             <v-avatar>
-                                <v-icon
-                                    large
-                                    color="white darken-1"
-                                    style="background: grey"
-                                >
-                                    mdi-face
-                                </v-icon>
+                                <v-img
+                                    v-if="!residentData[i]"
+                                    src="https://rickandmortyapi.com/api/character/avatar/66.jpeg"
+                                ></v-img>
+                                <v-img
+                                    lazy-src="https://rickandmortyapi.com/api/character/avatar/66.jpeg"
+                                    v-if="residentData[i]"
+                                    :src="residentData[i].image"
+                                    alt="Alien"
+                                ></v-img>
                             </v-avatar>
                         </v-col>
                         <v-col cols="2">
                             <v-avatar style="border: 1px solid #a7a7a78c">
-                                <v-icon
-                                    large
-                                    color="black darken-1"
-                                >
-                                    mdi-chevron-right
-                                </v-icon>
+                                <i aria-hidden="true" class="v-icon notranslate mdi mdi-chevron-right theme--dark black--text text--darken-1" style="font-size: 36px;"></i>
                             </v-avatar>
                         </v-col>
                     </v-row>
                 </v-container>
             </v-card>
             <v-card
-                color="white lighten-2"
+                color="white"
                 dark
                 style="border-radius: 18px; min-height: 70px;"
                 v-else
@@ -69,11 +67,17 @@
                         cols="4"
                     >
                         <v-card
-                            class="pa-2"
                             style="border-radius: 30px !important; padding: 0 !important;"
                             @click="goToCharacterPage(res)"
                         >
-                            <v-img :src="res.image" max-width="100%">
+                            <v-img 
+                                v-if="!residentData[index]"
+                                src="https://rickandmortyapi.com/api/character/avatar/66.jpeg"></v-img>
+                            <v-img 
+                                v-if="residentData[index]"
+                                lazy-src="https://rickandmortyapi.com/api/character/avatar/66.jpeg"
+                                :src="residentData[index].image"
+                                max-width="100%">
                                 <template v-slot:placeholder>
                                     <v-row
                                         class="fill-height ma-0"
@@ -88,8 +92,10 @@
                                 </template>
                             </v-img>
                             <div style="padding: 15px 20px">
-                                <h2>{{res.name}}</h2> 
-                                {{res.status}} <br/> 
+                                <h2 style="white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;">
+                                    {{res.name}}
+                                </h2> 
+                                <h4>{{res.status}} </h4> 
                                 {{res.species}}
                             </div>
                         </v-card>
@@ -110,8 +116,7 @@
     export default {
         data() {
             return {
-                residentData: [],
-                residentPreview: []
+                residentData: []
             }
         },
         props: {
@@ -121,19 +126,11 @@
             this.residents.map(chr => {
                 api.getCharacter(chr)
                     .then(response => {
-                        if (this.residentPreview.length<4) {
-                            this.residentPreview.push(response.data)
-                        }
                         this.residentData.push(response.data)
                     })
-                    .catch(error => {
-                        console.log(error)
-
+                    .catch(() => {
                         api.getCharacter(chr)
                             .then(response => {
-                                if (this.residentPreview.length<4) {
-                                    this.residentPreview.push(response.data)
-                                }
                                 this.residentData.push(response.data)
                             })
                     })
