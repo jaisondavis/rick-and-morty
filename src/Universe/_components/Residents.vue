@@ -10,7 +10,6 @@
                 v-on="on"
                 style="border-radius: 18px; min-height: 70px;"
                 v-if="residents.length"
-                @click="getAllCharacters"
             >
                 <v-container style="padding: 0px 20px;">
                     <v-row>
@@ -115,9 +114,6 @@
     .v-dialog {
         border-radius: 30px !important;
     }
-    .v-card:focus {
-        box-shadow: 0 0 3px 2px #ddd !important;
-    }
 </style>
 <script>
     import api from '../_api'
@@ -154,17 +150,6 @@
                 this.$router.push({ 
                     path: '/character/'+resident.id
                 })
-            },
-            getAllCharacters() {
-                // console.log("getAllCharacters ", (4-this.residents.slice(0,4).length)*2, 4-this.residents.slice(0,4).length)
-                // this.residents.map(chr => {
-                //     api.getCharacter(chr)
-                //         .then(response => {
-                //             if(this.residentData.length===0) {
-                //                 this.residentData.push(response.data)
-                //             }
-                //         })
-                // })
             }
         }
     }
