@@ -3,16 +3,13 @@ import VueRouter from 'vue-router'
 import vuetify from '@/_plugins/vuetify'
 
 import App from '@/App'
-import { Home } from '@/Universe'
-import { Character } from '@/Character'
-import { PageNotFound } from '@/404'
 import '@/_plugins/registerServiceWorker'
 
 const routes = [
   {
     path: '', 
     name: 'Home', 
-    component: Home,
+    component: () => import('@/Universe/_components/Universe.vue'),
     meta: {
       title: 'Rick and Morty'
     }
@@ -20,7 +17,7 @@ const routes = [
   { 
     path: '/character/:id',
     name: 'Character', 
-    component: Character,
+    component: () => import('@/Character/_components/Character.vue'),
     meta: {
       title: 'Character'
     }
@@ -28,7 +25,7 @@ const routes = [
   { 
     path: '*',
     name: 'Page Not Found', 
-    component: PageNotFound,
+    component: () => import('@/404/PageNotFound.vue'),
     meta: {
       title: 'Whoops!'
     }

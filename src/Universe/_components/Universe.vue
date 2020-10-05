@@ -4,7 +4,7 @@
             <v-col cols="3">
                 <v-img
                     class="logo"
-                    max-width="200"
+                    max-width="150"
                     src="@/_assets/rick_logo.png"
                 ></v-img>
             </v-col>
@@ -47,9 +47,7 @@
             }
         },
         async created() {
-            var firstLocation = await api.getLocation().catch(async () => {
-                firstLocation = await api.getLocation()
-            })
+            var firstLocation = await api.getLocation(1)
             this.location = [...firstLocation.data.results]
             
             for (let i=2; i<=firstLocation.data.info.pages; i++) {

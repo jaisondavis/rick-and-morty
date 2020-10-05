@@ -10,7 +10,6 @@
                 v-on="on"
                 style="border-radius: 18px; min-height: 70px;"
                 v-if="residents.length"
-                @click="getAllCharacters"
             >
                 <v-container style="padding: 0px 20px;">
                     <v-row>
@@ -132,14 +131,14 @@
             this.residents.map(chr => {
                 api.getCharacter(chr)
                     .then(response => {
-                        if(this.residentData.length<response.data.length) {
+                        if(this.residentData.length===0) {
                             this.residentData.push(response.data)
                         }
                     })
                     .catch(() => {
                         api.getCharacter(chr)
                             .then(response => {
-                                if(this.residentData.length<response.data.length) {
+                                if(this.residentData.length===0) {
                                     this.residentData.push(response.data)
                                 }
                             })
@@ -150,21 +149,6 @@
             goToCharacterPage(resident) {
                 this.$router.push({ 
                     path: '/character/'+resident.id
-                })
-            },
-            getAllCharacters() {
-                console.log("getAllCharacters")
-                this.residents.map(chr => {
-                    api.getCharacter(chr)
-                        .then(response => {
-                            this.residentData.push(response.data)
-                        })
-                        .catch(() => {
-                            api.getCharacter(chr)
-                                .then(response => {
-                                    this.residentData.push(response.data)
-                                })
-                        })
                 })
             }
         }
